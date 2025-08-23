@@ -1,0 +1,62 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Nuxt build output
+.nuxt/
+dist/
+build/
+.output/
+.vercel_build_output/
+
+# Cache
+.cache/
+.parcel-cache/
+.next/
+*.tsbuildinfo
+
+# Env files (keep secrets like TELEGRAM_BOT_TOKEN out of git)
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+*.log.*
+*.pid
+*.seed
+*.pid.lock
+
+# Telegram bot session/auth files
+sessions/
+*.session.json
+auth.json
+
+# Coverage reports
+coverage/
+
+# Docker
+docker-compose.override.yml
+docker-compose.*.yml
+.docker/
+.dockerignore
+*.local.yml
+*.local.yaml
+*.swp
+*.swo
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editors / IDE
+.vscode/
+
+# Misc
+*.tgz
+*.zip
+*.tar.gz
