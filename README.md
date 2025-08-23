@@ -1,6 +1,6 @@
 # Branches
 
-## Main (javascript)
+## Main (javascript) *Current
 
 ## Dev (python)
 
