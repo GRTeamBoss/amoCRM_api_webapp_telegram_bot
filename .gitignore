@@ -1,62 +1,77 @@
-# Node.js dependencies
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Nuxt build output
-.nuxt/
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
 dist/
 build/
-.output/
-.vercel_build_output/
+.eggs/
+*.manifest
+*.spec
 
-# Cache
-.cache/
-.parcel-cache/
-.next/
-*.tsbuildinfo
-
-# Env files (keep secrets like TELEGRAM_BOT_TOKEN out of git)
+# --- Virtual Environments ---
 .env
-.env.*
-!.env.example
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
-# Logs
-logs
-*.log
-*.log.*
-*.pid
-*.seed
-*.pid.lock
-
-# Telegram bot session/auth files
-sessions/
-*.session.json
-auth.json
-
-# Coverage reports
-coverage/
-
-# Docker
-docker-compose.override.yml
-docker-compose.*.yml
-.docker/
-.dockerignore
-*.local.yml
-*.local.yaml
+# --- IDE / Editor ---
+.vscode/
+.idea/
 *.swp
 *.swo
 
-# OS junk
+# --- Logs & Temp ---
+*.log
+*.pot
+*.mo
+*.tmp
+*.temp
+*.cache/
+.cache
+pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# --- Databases ---
+*.db
+*.sqlite3
+*.sqlite
+/data/
+
+# --- Env Variables ---
+*.env
+.env.*
+
+# --- OS-specific ---
 .DS_Store
 Thumbs.db
 
-# Editors / IDE
-.vscode/
+# --- Alembic (if using migrations) ---
+alembic/versions/*.pyc
+alembic/versions/__pycache__/
 
-# Misc
-*.tgz
-*.zip
-*.tar.gz
+# --- Docker ---
+# Ignore local overrides
+docker-compose.override.yml
+
+# Ignore volumes, logs, etc.
+docker-data/
+docker-volumes/
+*.pid
+*.seed
+*.out
+
+# Ignore Docker build artifacts
+*.tar
+*.img
+*.bak
