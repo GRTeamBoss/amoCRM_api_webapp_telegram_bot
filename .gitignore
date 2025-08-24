@@ -51,7 +51,7 @@ dmypy.json
 # --- Env Variables ---
 *.env
 .env.*
-tokens.json
+**/tokens.json
 
 # --- OS-specific ---
 .DS_Store
