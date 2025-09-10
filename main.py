@@ -8,7 +8,7 @@ from core.data import AmoDataParsing
 def main():
     config = Config()
     config.reload()
-    data_parser = AmoDataParsing(date_from="21.8.2025", date_to="21.8.2025")
+    data_parser = AmoDataParsing({}, date_from="7.9.2025", date_to="7.9.2025")
     leads = data_parser.update_leads()
     if leads:
         data_parser.save_pipelines_to_json(leads)

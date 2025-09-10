@@ -19,9 +19,9 @@ class Config:
     12805982: "SDR Sales"
   }
   TOKEN_DICT = json.loads(Path("tokens.json").read_text(encoding="utf-8"))
-  STAGES_DICT = json.loads(Path("stages.json").read_text(encoding="utf-8"))
+  # STAGES_DICT = json.loads(Path("stages.json").read_text(encoding="utf-8"))
 
   @classmethod
   def reload(cls):
       cls.TOKEN_DICT = json.loads(Path("tokens.json").read_text(encoding="utf-8"))
-      cls.STAGES_DICT = json.loads(Path("stages.json").read_text(encoding="utf-8"))
+      # cls.STAGES_DICT = json.loads(Path("stages.json").read_text(encoding="utf-8"))

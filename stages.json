@@ -1,0 +1,2104 @@
+{
+    "date_from": "7.9.2025",
+    "date_to": "7.9.2025",
+    "pipeline": {
+        "9695630": {
+            "name": "SDR - Samad",
+            "stages": {
+                "77295806": {
+                    "name": "Incoming leads",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "77295842": {
+                    "name": "PROSPECT",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "77295810": {
+                    "name": "COLD LEAD",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "77295814": {
+                    "name": "LEAD IN PROGRESS",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "77295818": {
+                    "name": "LEAD QUALIFIED",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "142": {
+                    "name": "Meeting Arranged",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "143": {
+                    "name": "Closed - lost",
+                    "leads": {
+                        "__total": 0
+                    }
+                }
+            }
+        },
+        "7982930": {
+            "name": "SDR - incoming calls",
+            "stages": {
+                "65511138": {
+                    "name": "Неразобранное",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "65511142": {
+                    "name": "Incoming leads",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "65511150": {
+                    "name": "Haven't answered",
+                    "leads": {
+                        "__total": 2,
+                        "19545643": "Звонок от +998906240040",
+                        "19545641": "Звонок от +998888002612"
+                    }
+                },
+                "72241962": {
+                    "name": "Lead in progress",
+                    "leads": {
+                        "__total": 1,
+                        "19545639": "Звонок от Номер не определен"
+                    }
+                },
+                "65511154": {
+                    "name": "lead QUalified",
+                    "leads": {
+                        "__total": 2,
+                        "19545633": "IT company",
+                        "19545635": "Проектный директор humoair"
+                    }
+                },
+                "77687906": {
+                    "name": "Meeting",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "76337698": {
+                    "name": "payment pending (M)",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "142": {
+                    "name": "Cowowrking Sales",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "143": {
+                    "name": "lost",
+                    "leads": {
+                        "__total": 1,
+                        "19545637": "Звонок от +998903221428"
+                    }
+                }
+            }
+        },
+        "9358622": {
+            "name": "SALES",
+            "stages": {
+                "75000966": {
+                    "name": "Неразобранное",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "77488762": {
+                    "name": "prospect",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "77488766": {
+                    "name": "Lead qualified",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "75000970": {
+                    "name": "SDR INBOUND (1 meeting)",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "75000974": {
+                    "name": "Offer preparation",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "75000978": {
+                    "name": "Offer SENT (2 meeting)",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "75001022": {
+                    "name": "Commited",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "75001026": {
+                    "name": "Contract negotiation",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "142": {
+                    "name": "Contract signed",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "143": {
+                    "name": "Закрыто и не реализовано",
+                    "leads": {
+                        "__total": 1
+                    }
+                }
+            }
+        },
+        "8101874": {
+            "name": "Community",
+            "stages": {
+                "66321566": {
+                    "name": "Неразобранное",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "66321570": {
+                    "name": "Sales inbound",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "66321574": {
+                    "name": "First feedback",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "66321578": {
+                    "name": "Recomendations",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "72813846": {
+                    "name": "Upsales",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "142": {
+                    "name": "active client",
+                    "leads": {
+                        "__total": 0
+                    }
+                },
+                "143": {
+                    "name": "Left",
+                    "leads": {
+                        "__total": 1
+                    }
+                }
+            }
+        }
+    },
+    "events": {},
+    "leads": {
+        "7982930": {
+            "10948814": {
+                "65511154": {
+                    "10886326": {
+                        "31662618": {
+                            "19545633": {
+                                "name": "IT company",
+                                "price": 0,
+                                "group_id": 0,
+                                "is_deleted": false,
+                                "score": null,
+                                "custom_fields_values": [
+                                    {
+                                        "field_id": 1001503,
+                                        "field_name": "Team size",
+                                        "field_code": null,
+                                        "field_type": "numeric",
+                                        "values": [
+                                            {
+                                                "value": "4"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 311141,
+                                        "field_name": "Product",
+                                        "field_code": null,
+                                        "field_type": "multiselect",
+                                        "values": [
+                                            {
+                                                "value": "Офисы",
+                                                "enum_id": 163279,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 1008147,
+                                        "field_name": "Industry",
+                                        "field_code": null,
+                                        "field_type": "select",
+                                        "values": [
+                                            {
+                                                "value": "IT",
+                                                "enum_id": 617737,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 1008913,
+                                        "field_name": "Responsible",
+                                        "field_code": null,
+                                        "field_type": "select",
+                                        "values": [
+                                            {
+                                                "value": "Mirvohid",
+                                                "enum_id": 618311,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 1008149,
+                                        "field_name": "Client type",
+                                        "field_code": null,
+                                        "field_type": "select",
+                                        "values": [
+                                            {
+                                                "value": "B2B",
+                                                "enum_id": 617747,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 1008169,
+                                        "field_name": "due deligence",
+                                        "field_code": null,
+                                        "field_type": "select",
+                                        "values": [
+                                            {
+                                                "value": "yes",
+                                                "enum_id": 617771,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 998921,
+                                        "field_name": "Lokatsiya (tashrif)",
+                                        "field_code": null,
+                                        "field_type": "multiselect",
+                                        "values": [
+                                            {
+                                                "value": "Yunusabad",
+                                                "enum_id": 608321,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "19545635": {
+                                "name": "Проектный директор humoair",
+                                "price": 0,
+                                "group_id": 0,
+                                "is_deleted": false,
+                                "score": null,
+                                "custom_fields_values": [
+                                    {
+                                        "field_id": 998921,
+                                        "field_name": "Lokatsiya (tashrif)",
+                                        "field_code": null,
+                                        "field_type": "multiselect",
+                                        "values": [
+                                            {
+                                                "value": "Chust",
+                                                "enum_id": 608317,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 1008913,
+                                        "field_name": "Responsible",
+                                        "field_code": null,
+                                        "field_type": "select",
+                                        "values": [
+                                            {
+                                                "value": "Mirvohid",
+                                                "enum_id": 618311,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 1008147,
+                                        "field_name": "Industry",
+                                        "field_code": null,
+                                        "field_type": "select",
+                                        "values": [
+                                            {
+                                                "value": "IT",
+                                                "enum_id": 617737,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 1008149,
+                                        "field_name": "Client type",
+                                        "field_code": null,
+                                        "field_type": "select",
+                                        "values": [
+                                            {
+                                                "value": "B2B",
+                                                "enum_id": 617747,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 311141,
+                                        "field_name": "Product",
+                                        "field_code": null,
+                                        "field_type": "multiselect",
+                                        "values": [
+                                            {
+                                                "value": "Офисы",
+                                                "enum_id": 163279,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 1001503,
+                                        "field_name": "Team size",
+                                        "field_code": null,
+                                        "field_type": "numeric",
+                                        "values": [
+                                            {
+                                                "value": "1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 1008169,
+                                        "field_name": "due deligence",
+                                        "field_code": null,
+                                        "field_type": "select",
+                                        "values": [
+                                            {
+                                                "value": "yes",
+                                                "enum_id": 617771,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "143": {
+                    "10886326": {
+                        "31662618": {
+                            "19545637": {
+                                "name": "Звонок от +998903221428",
+                                "price": 0,
+                                "group_id": 0,
+                                "is_deleted": false,
+                                "score": null,
+                                "custom_fields_values": [
+                                    {
+                                        "field_id": 311141,
+                                        "field_name": "Product",
+                                        "field_code": null,
+                                        "field_type": "multiselect",
+                                        "values": [
+                                            {
+                                                "value": "Open Space",
+                                                "enum_id": 163277,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 1008149,
+                                        "field_name": "Client type",
+                                        "field_code": null,
+                                        "field_type": "select",
+                                        "values": [
+                                            {
+                                                "value": "B2C",
+                                                "enum_id": 617745,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 1008147,
+                                        "field_name": "Industry",
+                                        "field_code": null,
+                                        "field_type": "select",
+                                        "values": [
+                                            {
+                                                "value": "IT",
+                                                "enum_id": 617737,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 1001503,
+                                        "field_name": "Team size",
+                                        "field_code": null,
+                                        "field_type": "numeric",
+                                        "values": [
+                                            {
+                                                "value": "1"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "65511150": {
+                    "10886326": {
+                        "31662618": {
+                            "19545643": {
+                                "name": "Звонок от +998906240040",
+                                "price": 0,
+                                "group_id": 0,
+                                "is_deleted": false,
+                                "score": null,
+                                "custom_fields_values": null
+                            },
+                            "19545641": {
+                                "name": "Звонок от +998888002612",
+                                "price": 0,
+                                "group_id": 0,
+                                "is_deleted": false,
+                                "score": null,
+                                "custom_fields_values": null
+                            }
+                        }
+                    }
+                },
+                "72241962": {
+                    "10886326": {
+                        "31662618": {
+                            "19545639": {
+                                "name": "Звонок от Номер не определен",
+                                "price": 0,
+                                "group_id": 0,
+                                "is_deleted": false,
+                                "score": null,
+                                "custom_fields_values": [
+                                    {
+                                        "field_id": 1008913,
+                                        "field_name": "Responsible",
+                                        "field_code": null,
+                                        "field_type": "select",
+                                        "values": [
+                                            {
+                                                "value": "Mirvohid",
+                                                "enum_id": 618311,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 1008149,
+                                        "field_name": "Client type",
+                                        "field_code": null,
+                                        "field_type": "select",
+                                        "values": [
+                                            {
+                                                "value": "B2B",
+                                                "enum_id": 617747,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 311141,
+                                        "field_name": "Product",
+                                        "field_code": null,
+                                        "field_type": "multiselect",
+                                        "values": [
+                                            {
+                                                "value": "Офисы",
+                                                "enum_id": 163279,
+                                                "enum_code": null
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "field_id": 1001503,
+                                        "field_name": "Team size",
+                                        "field_code": null,
+                                        "field_type": "numeric",
+                                        "values": [
+                                            {
+                                                "value": "4"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tasks": {
+        "10861362": {
+            "leads": {
+                "true": {
+                    "10886326": {
+                        "227701": {
+                            "text": "",
+                            "result": {
+                                "text": "оплатит завтра"
+                            },
+                            "complete_till": 1712980800
+                        },
+                        "__total": 1
+                    },
+                    "__total": 7,
+                    "10861362": {
+                        "228103": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1712948340
+                        },
+                        "__total": 6,
+                        "228135": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1725217140
+                        },
+                        "371737": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713380340
+                        },
+                        "371765": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713380340
+                        },
+                        "371775": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713380340
+                        },
+                        "270443": {
+                            "text": "актуализировать",
+                            "result": [],
+                            "complete_till": 1712948340
+                        }
+                    }
+                },
+                "__total": 7
+            },
+            "__total": 7
+        },
+        "10886326": {
+            "leads": {
+                "true": {
+                    "10861362": {
+                        "228619": {
+                            "text": "кп отправить",
+                            "result": [],
+                            "complete_till": 1712948340
+                        },
+                        "__total": 5,
+                        "298513": {
+                            "text": "13.04 приехали на конф.зал",
+                            "result": [],
+                            "complete_till": 1713207540
+                        },
+                        "298349": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713466740
+                        },
+                        "229925": {
+                            "text": "проведен тур в Элбеке, связаться с ним и обьяснить по поводу офиса и правил коворкинга",
+                            "result": [],
+                            "complete_till": 1712948340
+                        },
+                        "228663": {
+                            "text": "кп отправить",
+                            "result": [],
+                            "complete_till": 1712948340
+                        }
+                    },
+                    "__total": 155,
+                    "10886326": {
+                        "298523": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713207540
+                        },
+                        "__total": 145,
+                        "243707": {
+                            "text": "связаться узнать ответ клиента",
+                            "result": [],
+                            "complete_till": 1712948340
+                        },
+                        "298457": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713207540
+                        },
+                        "298539": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713207540
+                        },
+                        "298549": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713207540
+                        },
+                        "298363": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713207540
+                        },
+                        "298417": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713207540
+                        },
+                        "231993": {
+                            "text": "узнать точное прибитые в нашей стране и поставить дату на встречу",
+                            "result": [],
+                            "complete_till": 1712948340
+                        },
+                        "232113": {
+                            "text": "связаться последний раз предложить им дргуие варианты",
+                            "result": [],
+                            "complete_till": 1712948340
+                        },
+                        "236045": {
+                            "text": "предлагать другие варианты",
+                            "result": [],
+                            "complete_till": 1712948340
+                        },
+                        "230051": {
+                            "text": "повторно связаться с клиентом и узнать их мнение",
+                            "result": [],
+                            "complete_till": 1712948340
+                        },
+                        "1166811": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1715756400
+                        },
+                        "1168493": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1716184800
+                        },
+                        "1446941": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1716404340
+                        },
+                        "1216151": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1716231540
+                        },
+                        "1396861": {
+                            "text": "предупердить о брони",
+                            "result": [],
+                            "complete_till": 1716877800
+                        },
+                        "1681171": {
+                            "text": "Спросить последний ответ клиента",
+                            "result": {
+                                "text": "связались/ клиент просил перезвонить"
+                            },
+                            "complete_till": 1716836340
+                        },
+                        "1681541": {
+                            "text": "написать через тг узнать заключительный ответ",
+                            "result": {
+                                "text": "клиент думает"
+                            },
+                            "complete_till": 1716836340
+                        },
+                        "1682315": {
+                            "text": "",
+                            "result": {
+                                "text": "бошка кунга кочирищди"
+                            },
+                            "complete_till": 1716836340
+                        },
+                        "1681755": {
+                            "text": "узнать заключитенльный ответ клиента",
+                            "result": [],
+                            "complete_till": 1716836340
+                        },
+                        "1905779": {
+                            "text": "узнать решение клиента",
+                            "result": [],
+                            "complete_till": 1717181940
+                        },
+                        "1946251": {
+                            "text": "узнать ответ на наше  предложение",
+                            "result": [],
+                            "complete_till": 1717354740
+                        },
+                        "1955149": {
+                            "text": "напомнить о брони",
+                            "result": [],
+                            "complete_till": 1717441140
+                        },
+                        "1322447": {
+                            "text": "отправить другой вариант если есть",
+                            "result": [],
+                            "complete_till": 1716058740
+                        },
+                        "1681673": {
+                            "text": "звонить предложить 2 этаж Лабзак",
+                            "result": [],
+                            "complete_till": 1716836340
+                        },
+                        "1953027": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1717441140
+                        },
+                        "2217117": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1717959540
+                        },
+                        "2175829": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1717873140
+                        },
+                        "2161207": {
+                            "text": "",
+                            "result": {
+                                "text": "обещали завтра приехать"
+                            },
+                            "complete_till": 1718045940
+                        },
+                        "2270861": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1718132340
+                        },
+                        "2216037": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1717959540
+                        },
+                        "1844073": {
+                            "text": "узнать заключитенльный ответ клиента",
+                            "result": [],
+                            "complete_till": 1717441140
+                        },
+                        "1955323": {
+                            "text": "продлить договор",
+                            "result": [],
+                            "complete_till": 1717441140
+                        },
+                        "1846081": {
+                            "text": "узнать о предложении",
+                            "result": [],
+                            "complete_till": 1717181940
+                        },
+                        "1948177": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1717354740
+                        },
+                        "1946603": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1717354740
+                        },
+                        "2614953": {
+                            "text": "узнать факт оплаты",
+                            "result": [],
+                            "complete_till": 1718823540
+                        },
+                        "2369861": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1718391540
+                        },
+                        "2669763": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1719082740
+                        },
+                        "2669659": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1718909940
+                        },
+                        "2398881": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1718391540
+                        },
+                        "2279041": {
+                            "text": "узнать заключитенльный ответ клиента",
+                            "result": [],
+                            "complete_till": 1718132340
+                        },
+                        "1954853": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1717441140
+                        },
+                        "2796661": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1719255540
+                        },
+                        "2846465": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1719341940
+                        },
+                        "1952979": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1717441140
+                        },
+                        "1955021": {
+                            "text": "узнать запрос клиента",
+                            "result": [],
+                            "complete_till": 1717441140
+                        },
+                        "1966933": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1717527540
+                        },
+                        "2217307": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1717959540
+                        },
+                        "2164715": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1717786740
+                        },
+                        "2124031": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1717786740
+                        },
+                        "2519077": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1718650740
+                        },
+                        "2518197": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1718650740
+                        },
+                        "2518177": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1718650740
+                        },
+                        "2518161": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1718650740
+                        },
+                        "2637113": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1718909940
+                        },
+                        "3223239": {
+                            "text": "напомнить о бронировании",
+                            "result": [],
+                            "complete_till": 1720033140
+                        },
+                        "1954663": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1717441140
+                        },
+                        "1949295": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1717441140
+                        },
+                        "2348337": {
+                            "text": "узнать о предложении",
+                            "result": [],
+                            "complete_till": 1718218740
+                        },
+                        "2126861": {
+                            "text": "узнать ответ на наше  предложение",
+                            "result": [],
+                            "complete_till": 1717786740
+                        },
+                        "1967061": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1717441140
+                        },
+                        "2272925": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1718132340
+                        },
+                        "2272353": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1718132340
+                        },
+                        "2632827": {
+                            "text": "Пригласить на показ филиала",
+                            "result": [],
+                            "complete_till": 1718909940
+                        },
+                        "2669599": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1718909940
+                        },
+                        "2669575": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1718909940
+                        },
+                        "2797571": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1719255540
+                        },
+                        "2890953": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1719428340
+                        },
+                        "5231549": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1724180340
+                        },
+                        "8104875": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1732042740
+                        },
+                        "8137123": {
+                            "text": "",
+                            "result": {
+                                "text": "недозвон"
+                            },
+                            "complete_till": 1732105800
+                        },
+                        "8220563": {
+                            "text": "",
+                            "result": {
+                                "text": "не было времени"
+                            },
+                            "complete_till": 1732190400
+                        },
+                        "8181427": {
+                            "text": "",
+                            "result": {
+                                "text": "недозвон"
+                            },
+                            "complete_till": 1732176000
+                        },
+                        "8255377": {
+                            "text": "",
+                            "result": {
+                                "text": "недозвон"
+                            },
+                            "complete_till": 1732647540
+                        },
+                        "8116017": {
+                            "text": "",
+                            "result": {
+                                "text": "-"
+                            },
+                            "complete_till": 1732906740
+                        },
+                        "8250867": {
+                            "text": "",
+                            "result": {
+                                "text": "не актуально"
+                            },
+                            "complete_till": 1732561140
+                        },
+                        "8212535": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1733475600
+                        },
+                        "8146423": {
+                            "text": "",
+                            "result": {
+                                "text": "думает"
+                            },
+                            "complete_till": 1732613400
+                        },
+                        "8146405": {
+                            "text": "",
+                            "result": {
+                                "text": "-"
+                            },
+                            "complete_till": 1732615200
+                        },
+                        "8146995": {
+                            "text": "",
+                            "result": {
+                                "text": "не актуально"
+                            },
+                            "complete_till": 1732701600
+                        },
+                        "8362797": {
+                            "text": "",
+                            "result": {
+                                "text": "отправили предложение"
+                            },
+                            "complete_till": 1732733940
+                        },
+                        "8253577": {
+                            "text": "",
+                            "result": {
+                                "text": "-"
+                            },
+                            "complete_till": 1733079540
+                        },
+                        "8251209": {
+                            "text": "",
+                            "result": {
+                                "text": "-"
+                            },
+                            "complete_till": 1733079540
+                        },
+                        "8212387": {
+                            "text": "",
+                            "result": {
+                                "text": "недозвон"
+                            },
+                            "complete_till": 1733473800
+                        },
+                        "8211303": {
+                            "text": "",
+                            "result": {
+                                "text": "-"
+                            },
+                            "complete_till": 1733472000
+                        },
+                        "8869973": {
+                            "text": "Входящий звонок, перезвонил",
+                            "result": {
+                                "text": "Просила пространство для проведения Мастер класса по рисованию на 15-20 человек на 3-5 часов 17-18 декабря\nпредложил Event зону и дал номер менеджера Ильхома"
+                            },
+                            "complete_till": 1734029940
+                        },
+                        "8873255": {
+                            "text": "Оставил заявку в ресепшн",
+                            "result": {
+                                "text": "нужен офис на 7-10 человек, интересовался лаунж зонами, кухней, парковкой а также доступом к офису (ключ карта), изначально хотел Лабзак но также предложил Аэропорт"
+                            },
+                            "complete_till": 1734029940
+                        },
+                        "8897273": {
+                            "text": "Входящий звонок",
+                            "result": {
+                                "text": "нужен офис 30 - 40 кв м т.к. будет своя техника, занимаются созданием ИИ для камер\nОфис должен быть ближе к метро: Эльбек, Юнусабад и Чуст"
+                            },
+                            "complete_till": 1734116340
+                        },
+                        "8897767": {
+                            "text": "",
+                            "result": {
+                                "text": "Раз в неделю нужно место для митинга, предложил Лабзак и Буюк Ипак Йули"
+                            },
+                            "complete_till": 1734116340
+                        },
+                        "8899731": {
+                            "text": "Перезвон",
+                            "result": {
+                                "text": "нужен офис 30-40 кв м для представительства завода, любая локация\nбюджет 400$"
+                            },
+                            "complete_till": 1734116340
+                        },
+                        "8900527": {
+                            "text": "Перезвон",
+                            "result": {
+                                "text": "интересовалась зоной для проведения мероприятий на 30-40 человек \nв воскресенье в 11 00 (1.5 часа)"
+                            },
+                            "complete_till": 1734116340
+                        },
+                        "8926087": {
+                            "text": "перезвон",
+                            "result": {
+                                "text": "нужен офис на 3-4 человек в локациях Чуст, Лабзак, Эльбек\nкомпания занимается проектированием заводов, интересовался душевыми, зонами отдыха, и услугами которые предоставляем\nбюджет 500-1000$ смотря на величину офиса"
+                            },
+                            "complete_till": 1734202740
+                        },
+                        "8926915": {
+                            "text": "перезвон",
+                            "result": {
+                                "text": "нужен офис для 2х человек в лабзак \nтур фирма бюджет 500$"
+                            },
+                            "complete_till": 1734202740
+                        },
+                        "8867979": {
+                            "text": "Аэропорт хотел зайти но дверь была закрыта\nРезидент Эльбека, но хочет работать с филиала Бабур т.к. удобно",
+                            "result": {
+                                "text": "-"
+                            },
+                            "complete_till": 1734029940
+                        },
+                        "8934519": {
+                            "text": "",
+                            "result": {
+                                "text": "нужен офис 200 кв м, 20 человек со всеми удобствами\nброкерская компания, бюджет где-то 3000$"
+                            },
+                            "complete_till": 1734202740
+                        },
+                        "8966743": {
+                            "text": "",
+                            "result": {
+                                "text": "нужен офис 25 кв м (на 6 человек ), IT стартап компания, интересовался прочими услугами.\nбюджет 10 млн, предложил Аэро и Юнусабад"
+                            },
+                            "complete_till": 1734375540
+                        },
+                        "9002725": {
+                            "text": "",
+                            "result": {
+                                "text": "нужен был офис на 1 человека (Open Space не подходит т.к. будут созвоны), бюджет 1.500.000 сум\nпредложил офис на 1 человек в филиале Аэро, сказала что подумает и выйдет на связь"
+                            },
+                            "complete_till": 1734461940
+                        },
+                        "9004993": {
+                            "text": "",
+                            "result": {
+                                "text": "нужен был офис для 2х человекя.\nТуристическая фирма, бюджет 400- 500$, предложил Эльбек"
+                            },
+                            "complete_till": 1734461940
+                        },
+                        "9027767": {
+                            "text": "перезвон",
+                            "result": {
+                                "text": "нужен офис на 6 человек, интересовался ценой офисов, ничего конкретного не сказал\nНужно перезвонить"
+                            },
+                            "complete_till": 1734548340
+                        },
+                        "9030753": {
+                            "text": "",
+                            "result": {
+                                "text": "нужен офис на 8 человек, занимаются ведением канала ( блогеры), бюджет 15 млн в начале но дальше смогут платить больше"
+                            },
+                            "complete_till": 1734548340
+                        },
+                        "9032901": {
+                            "text": "",
+                            "result": {
+                                "text": "Риелтор, искал офис для зарубежных компаний, отправили предложение и фото офисов\nвыйдет на связь"
+                            },
+                            "complete_till": 1734548340
+                        },
+                        "9033405": {
+                            "text": "",
+                            "result": {
+                                "text": "связался с клиентом, они пока что прекратили поиски т.к. пока что остаются в старом офисе"
+                            },
+                            "complete_till": 1734548340
+                        },
+                        "9034677": {
+                            "text": "узнал информацию на всякий и придёт когда откроют фирму",
+                            "result": {
+                                "text": "узнал информацию на всякий и придёт когда откроют фирму"
+                            },
+                            "complete_till": 1734548340
+                        },
+                        "9036001": {
+                            "text": "",
+                            "result": {
+                                "text": "нужен офис для преподования английского языка детям примерно на 10 человек\nне подходит"
+                            },
+                            "complete_till": 1734548340
+                        },
+                        "9036231": {
+                            "text": "перезвон",
+                            "result": {
+                                "text": "нужны были Флекс места для 6 человек, сходил на локацию Лабзак но не устроил вид \nпредложил Эльбек и Юнусабад, сказал что сходит и затем скажет свой ответ"
+                            },
+                            "complete_till": 1734548340
+                        },
+                        "9058607": {
+                            "text": "перезвон",
+                            "result": {
+                                "text": "нужен офис 25-30 кв м (на 8 человек где то) для Тур фирмы в Мирабадском районе, предложил Эльбек\nбюджет 1000$, отправил фото/видео офиса"
+                            },
+                            "complete_till": 1734634740
+                        },
+                        "9058835": {
+                            "text": "перезвон",
+                            "result": {
+                                "text": "нужен офис на 6 человек, фирма Газпром\nСпрашивала насчёт Модеры (когда откроется) и информацию про офисы"
+                            },
+                            "complete_till": 1734634740
+                        },
+                        "9062707": {
+                            "text": "",
+                            "result": {
+                                "text": "нужен был офис для 4х человек, занимаются IT разработкой, также спрашивал Open space места"
+                            },
+                            "complete_till": 1734634740
+                        },
+                        "9072131": {
+                            "text": "",
+                            "result": {
+                                "text": "связался по заявке\nсказал что хочет прийти в филиал Элбек чтобы посмотреть офисы для своей компании \n19 декабря с 11-12"
+                            },
+                            "complete_till": 1734634740
+                        },
+                        "9072177": {
+                            "text": "",
+                            "result": {
+                                "text": "-"
+                            },
+                            "complete_till": 1734588000
+                        },
+                        "9027837": {
+                            "text": "",
+                            "result": {
+                                "text": "не актуально"
+                            },
+                            "complete_till": 1734634740
+                        },
+                        "9089655": {
+                            "text": "",
+                            "result": {
+                                "text": "нужен офис именно на локации Чуст, но свободных офисов там нет\nсказал что свяжемся как только будут свободные офисы"
+                            },
+                            "complete_till": 1734721140
+                        },
+                        "9089803": {
+                            "text": "",
+                            "result": {
+                                "text": "им не подходим, т.к. нужен офис в менее людном месте"
+                            },
+                            "complete_till": 1734721140
+                        },
+                        "9090033": {
+                            "text": "",
+                            "result": {
+                                "text": "не актуально, уже нашли офис"
+                            },
+                            "complete_till": 1734721140
+                        },
+                        "9092835": {
+                            "text": "",
+                            "result": {
+                                "text": "-"
+                            },
+                            "complete_till": 1734721140
+                        },
+                        "9092901": {
+                            "text": "",
+                            "result": {
+                                "text": "Приходил посмотреть филиал Эльбек, интересовался юр адресом"
+                            },
+                            "complete_till": 1734721140
+                        },
+                        "9128393": {
+                            "text": "перезвон",
+                            "result": {
+                                "text": "нужен офис для 6 человек. Маркетинговое агентство, предложил Лабзак но у клиента бюджет 500$"
+                            },
+                            "complete_till": 1734807540
+                        },
+                        "9129223": {
+                            "text": "перезвон",
+                            "result": {
+                                "text": "хотели назначить показ чтобы посмотреть филиал но передумали"
+                            },
+                            "complete_till": 1734807540
+                        },
+                        "9129817": {
+                            "text": "",
+                            "result": {
+                                "text": "нужен офис для 6 человек, также интересовался вообще бизнес центром C Space\nрассказал все услуги, клиенту понравилось\nхочет прийти на тур 21 декабря"
+                            },
+                            "complete_till": 1734807540
+                        },
+                        "9131595": {
+                            "text": "",
+                            "result": {
+                                "text": "нужен офис для Логистов (офис для 2их ), хочет прийти и посмотреть"
+                            },
+                            "complete_till": 1734807540
+                        },
+                        "9142803": {
+                            "text": "",
+                            "result": {
+                                "text": "Нужен офис для 3 человек, предложил офис на 2их в Эльбек и Open Space место \nКонсалтинговая компания которая занимается бизнес процессами\nнужно связаться позже"
+                            },
+                            "complete_till": 1734893940
+                        },
+                        "9143225": {
+                            "text": "по заявке",
+                            "result": {
+                                "text": "нужен офис для 2х человек\nКомпания Службой поддержки Китайской логистической компании\nрассчитывал бюджет в 3 млн сум, но не включая коммунальные и др услуги"
+                            },
+                            "complete_till": 1734893940
+                        },
+                        "9146079": {
+                            "text": "",
+                            "result": {
+                                "text": "нужен офис для учебного центра"
+                            },
+                            "complete_till": 1734893940
+                        },
+                        "9146407": {
+                            "text": "",
+                            "result": {
+                                "text": "юридическая фирма\nнужны 2 комнаты 1 для 4х человек, 1 для руководителя"
+                            },
+                            "complete_till": 1734893940
+                        },
+                        "9148217": {
+                            "text": "",
+                            "result": {
+                                "text": "спросил насчёт конференц комнат для проведения урока по видеографии сроком в 15 дней\nдал номер менеджера Лабзак"
+                            },
+                            "complete_till": 1734893940
+                        },
+                        "9149461": {
+                            "text": "",
+                            "result": {
+                                "text": "пока что думает, выйдет на связь если решит купить"
+                            },
+                            "complete_till": 1734893940
+                        },
+                        "9149523": {
+                            "text": "",
+                            "result": {
+                                "text": "нашли офис в другом месте"
+                            },
+                            "complete_till": 1734893940
+                        },
+                        "9149577": {
+                            "text": "",
+                            "result": {
+                                "text": "не актуально до следующего года"
+                            },
+                            "complete_till": 1734893940
+                        },
+                        "9150287": {
+                            "text": "",
+                            "result": {
+                                "text": "нужен офис для нотариуса, 3 офиса но чтобы было отдельно от всех офисов\nнужен именно в филиале Чуст"
+                            },
+                            "complete_till": 1734893940
+                        },
+                        "9172925": {
+                            "text": "перезвон",
+                            "result": {
+                                "text": "нужен офис для 4х человек \nРекламное агентство\nудобные филиалы Чуст и Юнусабад\nспрашивали насчёт цен и услуг\nбюджет 7 млн но сказал обсудит с партнёрами и выйдет на связь"
+                            },
+                            "complete_till": 1735066740
+                        },
+                        "9173129": {
+                            "text": "",
+                            "result": {
+                                "text": "спрашивал про Open Space места и тарифы, хотел прийти поработать где-то 3 часа\nнужно перезвонить чтобы уточнить"
+                            },
+                            "complete_till": 1735066740
+                        },
+                        "9173791": {
+                            "text": "перезвон",
+                            "result": {
+                                "text": "спрашивала про переговорную комнату для 1 го человека, на локации Аэро\nнужно на 3 часа"
+                            },
+                            "complete_till": 1735066740
+                        },
+                        "9174779": {
+                            "text": "перезвон",
+                            "result": {
+                                "text": "нужен офис для 10 человек в филиале Элбек\nПредложил 2 офиса на 8 и на 2 человека\nнужно позже узнать насчёт решения т.к. отправил фото офиса"
+                            },
+                            "complete_till": 1735066740
+                        },
+                        "9174987": {
+                            "text": "",
+                            "result": {
+                                "text": "спрашивала про юр адрес и сколько стоит если компания без ндс"
+                            },
+                            "complete_till": 1735066740
+                        },
+                        "9184003": {
+                            "text": "ещё не посетил филиалы чтобы решить",
+                            "result": {
+                                "text": "ещё не посетил филиалы чтобы решить"
+                            },
+                            "complete_till": 1735066740
+                        },
+                        "9186923": {
+                            "text": "",
+                            "result": {
+                                "text": "нужен офис с января для 6 человек (предпочтительно Аэро)\nМаркетинговая компания \nснимают офис в другом месте но т.к. повысили цену хотят найти другое место\nтам за разные услуги платят отдельно\nнаши условия понравились клиенту и в скором времени собирается прийти посмотреть офис"
+                            },
+                            "complete_till": 1735066740
+                        },
+                        "9215187": {
+                            "text": "",
+                            "result": {
+                                "text": "перезвон\nнужен офис для 4х человек в стороне Тинчлик метро\nКонсалтинговая компания\nрассчитывал бюджет 1.6 млн на человека"
+                            },
+                            "complete_till": 1735153140
+                        },
+                        "9215317": {
+                            "text": "",
+                            "result": {
+                                "text": "Спрашивала контакты филиала Чуст"
+                            },
+                            "complete_till": 1735153140
+                        },
+                        "9030129": {
+                            "text": "",
+                            "result": {
+                                "text": "-"
+                            },
+                            "complete_till": 1734980340
+                        },
+                        "9218951": {
+                            "text": "",
+                            "result": {
+                                "text": "не актуально, покупают квартиру"
+                            },
+                            "complete_till": 1735153140
+                        },
+                        "9235841": {
+                            "text": "",
+                            "result": {
+                                "text": "ошибся номером"
+                            },
+                            "complete_till": 1735239540
+                        },
+                        "9236059": {
+                            "text": "",
+                            "result": {
+                                "text": "нужен офис для 2х человек, компания предоставляет визовую поддержку клиентам\nтакже нужны будут переговорные комнаты для встреч с клиентами"
+                            },
+                            "complete_till": 1735239540
+                        },
+                        "9243219": {
+                            "text": "",
+                            "result": {
+                                "text": "нашли офис"
+                            },
+                            "complete_till": 1735239540
+                        },
+                        "9243335": {
+                            "text": "",
+                            "result": {
+                                "text": "пока что не актуально т.к. нету лицензии у фирмы"
+                            },
+                            "complete_till": 1735239540
+                        }
+                    },
+                    "10948814": {
+                        "1323651": {
+                            "text": "Видеозвонок с клиентом",
+                            "result": {
+                                "text": "был созвон с клиентом, сказали подумают и даст точный ответ"
+                            },
+                            "complete_till": 1716161400
+                        },
+                        "__total": 5,
+                        "8509035": {
+                            "text": "",
+                            "result": {
+                                "text": "дозвонился"
+                            },
+                            "complete_till": 1733165940
+                        },
+                        "8509109": {
+                            "text": "",
+                            "result": {
+                                "text": "связался"
+                            },
+                            "complete_till": 1733165940
+                        },
+                        "8873639": {
+                            "text": "Had a meeting, and went through options at the Airport and Labzak. Liked the option in Labzak for 12 personal room and the option for 6 people in Airport 202. Prices set 1200$ and 2000$ (labzak)",
+                            "result": [],
+                            "complete_till": 1734029940
+                        },
+                        "8889731": {
+                            "text": "",
+                            "result": {
+                                "text": "Had a meeting, and went through options at the Airport and Labzak. Liked the option in Labzak for 12 personal room and the option for 6 people in Airport 202. Prices set 1200$ and 2000$ (labzak)"
+                            },
+                            "complete_till": 1734721140
+                        }
+                    }
+                },
+                "__total": 155
+            },
+            "__total": 155
+        },
+        "10948814": {
+            "leads": {
+                "true": {
+                    "10948814": {
+                        "380499": {
+                            "text": "Узнать доступность комнат",
+                            "result": {
+                                "text": "позвонить клиенту"
+                            },
+                            "complete_till": 1713284219
+                        },
+                        "__total": 88,
+                        "380509": {
+                            "text": "Узнать доступность комнат",
+                            "result": {
+                                "text": "позвонить клиенту"
+                            },
+                            "complete_till": 1713284160
+                        },
+                        "380527": {
+                            "text": "Узнать доступность комнат",
+                            "result": {
+                                "text": "овов"
+                            },
+                            "complete_till": 1713284160
+                        },
+                        "386437": {
+                            "text": "check office availability and recall",
+                            "result": [],
+                            "complete_till": 1713335400
+                        },
+                        "387139": {
+                            "text": "give offer for Elbek and Labzak",
+                            "result": [],
+                            "complete_till": 1713335400
+                        },
+                        "394553": {
+                            "text": "Отправить предложение дедикетед стола и офис на юнасабаде",
+                            "result": {
+                                "text": "узнать выбор и проверить статус"
+                            },
+                            "complete_till": 1713342600
+                        },
+                        "394667": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713553140
+                        },
+                        "400929": {
+                            "text": "отправить чуст 4 человека, и юнасабад 6 челов по телеграму",
+                            "result": [],
+                            "complete_till": 1713466740
+                        },
+                        "400961": {
+                            "text": "Отправить предложение дедикетед стола и офис на юнасабаде",
+                            "result": [],
+                            "complete_till": 1713466740
+                        },
+                        "401571": {
+                            "text": "отправить чуст 4 человека, и юнасабад 6 челов по телеграму",
+                            "result": [],
+                            "complete_till": 1713344400
+                        },
+                        "402137": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713353400
+                        },
+                        "401729": {
+                            "text": "узнать ответ что выбрал",
+                            "result": [],
+                            "complete_till": 1713466740
+                        },
+                        "427185": {
+                            "text": "узнать ответ что выбрал",
+                            "result": [],
+                            "complete_till": 1713553140
+                        },
+                        "408725": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713466740
+                        },
+                        "417093": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713466740
+                        },
+                        "387599": {
+                            "text": "text to lead in telegram if he won't reach on it's own",
+                            "result": [],
+                            "complete_till": 1713414600
+                        },
+                        "440131": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713553140
+                        },
+                        "447159": {
+                            "text": "",
+                            "result": {
+                                "text": "said will take a look"
+                            },
+                            "complete_till": 1713553140
+                        },
+                        "427397": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713553140
+                        },
+                        "440339": {
+                            "text": "check the status",
+                            "result": {
+                                "text": "invite to an office"
+                            },
+                            "complete_till": 1713553140
+                        },
+                        "401641": {
+                            "text": "",
+                            "result": {
+                                "text": "ask to call after a week"
+                            },
+                            "complete_till": 1713553140
+                        },
+                        "437181": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713553140
+                        },
+                        "469823": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713639540
+                        },
+                        "461043": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713639540
+                        },
+                        "409803": {
+                            "text": "Wait, if he won't reach then decline as loose",
+                            "result": [],
+                            "complete_till": 1713639540
+                        },
+                        "460393": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713639540
+                        },
+                        "463433": {
+                            "text": "IT company for 1 month",
+                            "result": [],
+                            "complete_till": 1713639540
+                        },
+                        "468765": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713639540
+                        },
+                        "460809": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713639540
+                        },
+                        "461001": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713639540
+                        },
+                        "468125": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713639540
+                        },
+                        "495091": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713985140
+                        },
+                        "498107": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713812340
+                        },
+                        "495059": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713812340
+                        },
+                        "493295": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713812340
+                        },
+                        "490119": {
+                            "text": "what his impresion?",
+                            "result": [],
+                            "complete_till": 1713725940
+                        },
+                        "493283": {
+                            "text": "IT company for 1 month",
+                            "result": [],
+                            "complete_till": 1713812340
+                        },
+                        "492311": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713812340
+                        },
+                        "530957": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713812340
+                        },
+                        "549509": {
+                            "text": "IT company for 1 month",
+                            "result": [],
+                            "complete_till": 1713898740
+                        },
+                        "427193": {
+                            "text": "узнать ответ что выбрал",
+                            "result": [],
+                            "complete_till": 1713898740
+                        },
+                        "578373": {
+                            "text": "узнать ответ что выбрал",
+                            "result": [],
+                            "complete_till": 1713898740
+                        },
+                        "495079": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713898740
+                        },
+                        "547891": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713898740
+                        },
+                        "490057": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713812340
+                        },
+                        "579987": {
+                            "text": "documents",
+                            "result": [],
+                            "complete_till": 1713985140
+                        },
+                        "577793": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713985140
+                        },
+                        "530297": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713985140
+                        },
+                        "460725": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1714071540
+                        },
+                        "529765": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713985140
+                        },
+                        "578039": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1713985140
+                        },
+                        "604141": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1714071540
+                        },
+                        "599023": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1714071540
+                        },
+                        "654473": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1714071540
+                        },
+                        "655369": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1714676340
+                        },
+                        "652511": {
+                            "text": "did he find alternative",
+                            "result": [],
+                            "complete_till": 1714417140
+                        },
+                        "460885": {
+                            "text": "ask what he decided",
+                            "result": [],
+                            "complete_till": 1714157940
+                        },
+                        "530025": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1714157940
+                        },
+                        "660283": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1714157940
+                        },
+                        "655339": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1714676340
+                        },
+                        "655051": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1714676340
+                        },
+                        "654747": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1715108340
+                        },
+                        "529995": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1714417140
+                        },
+                        "490077": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1714244340
+                        },
+                        "5219211": {
+                            "text": "",
+                            "result": [],
+                            "complete_till": 1724050800
+                        },
+                        "7736651": {
+                            "text": "Set up meeting date and time",
+                            "result": [],
+                            "complete_till": 1731178740
+                        },
+                        "8059255": {
+                            "text": "Call and schedule meeting",
+                            "result": [],
+                            "complete_till": 1731956340
+                        },
+                        "8143587": {
+                            "text": "",
+                            "result": {
+                                "text": "meeting at 13:00"
+                            },
+                            "complete_till": 1732215540
+                        },
+                        "8287327": {
+                            "text": "",
+                            "result": {
+                                "text": "djldwjlwjljewj"
+                            },
+                            "complete_till": 1732474740
+                        },
+                        "8110945": {
+                            "text": "",
+                            "result": {
+                                "text": "Faced a problem in Business rescheduled moving to new office to January"
+                            },
+                            "complete_till": 1732561140
+                        },
+                        "8397101": {
+                            "text": "",
+                            "result": {
+                                "text": "-"
+                            },
+                            "complete_till": 1732733940
+                        },
+                        "8661935": {
+                            "text": "",
+                            "result": {
+                                "text": "Client asked for office for 10 persons and ready for purchase for 400$"
+                            },
+                            "complete_till": 1733511540
+                        },
+                        "8796767": {
+                            "text": "Define request",
+                            "result": {
+                                "text": "Spell with client, need an office for 50m^2 (7-10 people) for an office, in central part of the city. Key point is to move from Labzak. Modera isn’t working for them and none of our locations except of orient. Need a place in Orient with all services. Or around subway station in central part of the city."
+                            },
+                            "complete_till": 1733943540
+                        },
+                        "8750075": {
+                            "text": "Oko",
+                            "result": [],
+                            "complete_till": 1733857140
+                        },
+                        "8760347": {
+                            "text": "Prepare Commercial Offer in Labzak 3, and 4 person room start at February",
+                            "result": {
+                                "text": "Couldn’t find an office per request"
+                            },
+                            "complete_till": 1733857140
+                        },
+                        "8871371": {
+                            "text": "From OLX",
+                            "result": {
+                                "text": "Had a call with client interested in renting office for tour company, need an office for 6 person, available planed budged around 700"
+                            },
+                            "complete_till": 1734029940
+                        },
+                        "8871719": {
+                            "text": "Call",
+                            "result": {
+                                "text": "Scheduled meeting to tomorrow at 10 am on site"
+                            },
+                            "complete_till": 1734029940
+                        },
+                        "8871761": {
+                            "text": "Call",
+                            "result": {
+                                "text": "Had a meeting, max available budget is 700$ as for a day of the meeting. Asked for room for 10 people. But can not afford jump from 700$ directly to 2000$. As a proposal I recommended model when he will pay first 2 month by 700$ and then the price will increase. Where in yearly average it will be 1500$ per month. He said he will think and come back with an answer."
+                            },
+                            "complete_till": 1734029940
+                        },
+                        "8796933": {
+                            "text": "Find a place and prepare some offer for a client",
+                            "result": {
+                                "text": "Couldn’t find an option from CW brokerage"
+                            },
+                            "complete_till": 1733943540
+                        },
+                        "8921115": {
+                            "text": "Revived a call",
+                            "result": {
+                                "text": "Spoke with a client and didn’t find his pain, need an office for as cheep as possible, checked option in Beruniy requested some photo and video materials"
+                            },
+                            "complete_till": 1734202740
+                        },
+                        "8916665": {
+                            "text": "Reach out to schedule a meeting",
+                            "result": {
+                                "text": "Bugun C-Space Airport filialini korishga vaqtiz boladimi? \n\nClient - we will go to Elbek branch, want to take whole floor"
+                            },
+                            "complete_till": 1734116340
+                        },
+                        "8873121": {
+                            "text": "Reach him out in telegram to to schedule meeting",
+                            "result": {
+                                "text": "Didn’t call or respond"
+                            },
+                            "complete_till": 1734116340
+                        },
+                        "8884349": {
+                            "text": "Follow up with option about gradually increasing price for 203",
+                            "result": [],
+                            "complete_till": 1734375540
+                        },
+                        "8921841": {
+                            "text": "Reach out to get update",
+                            "result": {
+                                "text": "Had a meeting at airport didn’t like it"
+                            },
+                            "complete_till": 1734375540
+                        },
+                        "8921217": {
+                            "text": "Ask would they like to visit location",
+                            "result": {
+                                "text": "Assalamu alaykum, Yaxshi yuribsimi? Joy qidiruvi qanaqa ketvoti?"
+                            },
+                            "complete_till": 1734375540
+                        },
+                        "9007435": {
+                            "text": "Ask would they like to visit location",
+                            "result": {
+                                "text": "didn't respond"
+                            },
+                            "complete_till": 1734461940
+                        },
+                        "8884383": {
+                            "text": "Find a place and prepare some offer for a client",
+                            "result": {
+                                "text": "couldn't find location, we are on a stage of negotiation new location"
+                            },
+                            "complete_till": 1734461940
+                        },
+                        "8960695": {
+                            "text": "Find a place closer to center and sub away station, with comfortable service. 200 sqm around 30 personal. Need an office to move in in January. Budget around 5000$ ready to pay a bit more or less depending on conditions and other factors",
+                            "result": {
+                                "text": "couldn't find a place for now, searching office for 200 sq m for 30p"
+                            },
+                            "complete_till": 1734548340
+                        }
+                    },
+                    "__total": 88
+                },
+                "__total": 88
+            },
+            "__total": 88
+        }
+    }
+}
