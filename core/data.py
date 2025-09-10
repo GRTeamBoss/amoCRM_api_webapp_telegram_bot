@@ -145,7 +145,6 @@ class AmoDataParsing:
     while True:
       try:
         response = requests.get(url, headers=headers, timeout=100, params=params)
-        print(f"event - page {page} - status {response.status_code}")
         response.raise_for_status()
         page += 1
         events = response.json().get("_embedded", {}).get("events", [])
@@ -208,7 +207,6 @@ class AmoDataParsing:
         else:
           params.append((f"filter[{k}][]", v))
     response = requests.get(url, headers=headers, timeout=100, params=params)
-    print(f"leads - page {page} - status {response.status_code}")
     response.raise_for_status()
     if response.status_code == 200:
       return response.json().get("_embedded", {}).get("leads", [])
