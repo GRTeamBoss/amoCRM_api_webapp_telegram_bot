@@ -3,7 +3,6 @@ from middleware import token_validate
 from core.data import AmoDataParsing
 
 
-
 @token_validate
 def main():
     config = Config()

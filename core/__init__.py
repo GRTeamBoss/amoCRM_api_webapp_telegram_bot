@@ -53,3 +53,4 @@ class TaskFilter(TypedDict):
   with_: None | str
   order: None | OrderFilter
   query: None | int | str
+  pipeline_id: None | int | str

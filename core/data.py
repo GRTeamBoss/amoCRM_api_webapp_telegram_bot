@@ -1,10 +1,10 @@
 import json
 from pathlib import Path
 from collections import Counter
-from datetime import date, datetime
-import time
+from datetime import date, datetime, timedelta
 from typing import Union, List, Dict, Optional, Required, Any
 
+from openpyxl import Workbook
 import requests
 
 from config.config import Config
@@ -26,6 +26,8 @@ class AmoDataParsing:
     self.filter: dict = serialize_dict_to_json(filter)
     self.date_from: str = date_from
     self.date_to: str = date_to
+    # self.wb: Workbook = Workbook()
+
 
   
   def _serialize_date_to_timestamp(self, default: str, from_: str=None, to_: str=None) -> int | Dict | None:
@@ -51,6 +53,9 @@ class AmoDataParsing:
         }
       else:
         return None
+      
+  def _add_day(self, default: str):
+    return (datetime.datetime.strptime(default, "%d.%m.%Y")+timedelta(days=1)).day
 
 
   def get_headers(self) -> Dict:
@@ -61,6 +66,23 @@ class AmoDataParsing:
 
   @token_validate
   def update_leads(self) -> Dict:
+    date_from_ = self.date_from
+    date_to_ = self.date_to
+    day_from, month_from, year_from = date_from_.split(".")
+    day_to, month_to, year_to = date_to_.split(".")
+    if int(month_to) > int(month_from):
+      for month in range(int(month_from), int(month_to)+1):
+        next_day = False
+        while True:
+          if next_day == 1:
+            break
+          day = next_day or int(day_from)
+          AmoDataParsing({}, date_from=f"{day}.{month}.{year_from}", date_to=f"{day}.{month}.{year_from}").update_leads()
+          next_day = self._add_day(date_from_)
+    else:
+      if int(day_to) > int(day_from):
+        for day in range(int(day_from), int(day_to)+1):
+          AmoDataParsing({}, date_from=f"{day}.{month_from}.{year_from}", date_to=f"{day}.{month_from}.{year_from}").update_leads()
     result = {}
     pipelines = self.get_pipelines()
     tasks = self.get_tasks()
@@ -74,57 +96,79 @@ class AmoDataParsing:
     for pipeline in pipelines:
       leads = self.get_leads(pipeline["id"])
       events = self.get_events(pipeline["id"])
-      stages = pipeline.get("_embedded", {}).get("statuses", [])
+      statuses = pipeline.get("_embedded", {}).get("statuses", [])
 
-      if leads:
-        leadCounter = Counter(lead.get("status_id", 0) for lead in leads if lead.get("pipeline_id", []) == pipeline["id"])
-
-      result["pipeline"][pipeline["id"]] = {
-        "name": pipeline["name"],
-        "stages": {
-          stage["id"]: {
-            "name": stage["name"], 
-            "leads": {"__total": leadCounter.get(stage["id"], 0)},
-          } for stage in stages
+      result.get("pipeline", {})[pipeline["id"]] = {
+        "name": pipeline["id"],
+        "account_id": pipeline["account_id"],
+        "statuses": {
+          "__total": 0
         }
       }
 
+      for status in statuses:
+        result.get("pipeline", {}).get(pipeline["id"], {}).get("statuses", {})[status["id"]] = {
+          "name": status.get("name", None),
+          "sort": status.get("sort", None),
+          "type": status.get("type", None),
+          "account_id": status.get("account_id", None),
+          "leads": {
+            "__total": 0
+          }
+        }
+
       if leads:
+        leadCounter = Counter((lead["status_id"], lead["pipeline_id"]) for lead in leads)
+        leadPipelineCounter = Counter(lead["pipeline_id"] for lead in leads)
+        for status in statuses:
+          result.get("pipeline", {}).get(pipeline["id"], {}).get("statuses", {})["__total"] = leadPipelineCounter.get(status["pipeline_id"], 0)
+          result.get("pipeline", {}).get(pipeline["id"], {}).get("statuses", {}).get(status["id"], {}).get("leads", {})["__total"] = leadCounter.get((status["id"], status["pipeline_id"]), 0)
         for lead in leads:
-          result["pipeline"][lead["pipeline_id"]]["stages"].get(lead["status_id"], {}).get("leads", {})[lead["id"]] = lead["name"]
-          result["leads"].setdefault(lead["pipeline_id"], {}).setdefault(lead["created_by"], {}).setdefault(lead["status_id"], {}).setdefault(lead["responsible_user_id"], {}).setdefault(lead["account_id"], {})[lead["id"]] = {
+          result.get("pipeline", {}).get(pipeline["id"], {}).get("statuses", {}).get(lead["status_id"], {}).get("leads", {})[lead["id"]] = lead["name"]
+
+      if leads:
+        leadPipelineCounter = Counter(lead["pipeline_id"] for lead in leads)
+        leadUserCounter = Counter((lead["pipeline_id"], lead["responsible_user_id"]) for lead in leads)
+        leadStatusCounter = Counter((lead["pipeline_id"], lead["responsible_user_id"], lead["status_id"]) for lead in leads)
+        for lead in leads:
+          result.get("leads", {}).setdefault(lead["pipeline_id"], {})["__total"] = leadPipelineCounter.get(lead["pipeline_id"], 0)
+          result.get("leads", {}).setdefault(lead["pipeline_id"], {}).setdefault(lead["responsible_user_id"], {})["__total"] = leadUserCounter.get((lead["pipeline_id"], lead["responsible_user_id"]), 0)
+          result.get("leads", {}).setdefault(lead["pipeline_id"], {}).setdefault(lead["responsible_user_id"], {}).setdefault(lead["status_id"], {})["__total"] = leadStatusCounter.get((lead["pipeline_id"], lead["responsible_user_id"], lead["status_id"]), 0)
+          result.get("leads", {}).get(lead["pipeline_id"], {}).get(lead["responsible_user_id"], {}).get(lead["status_id"], {})[lead["id"]] = {
             "name": lead["name"],
             "price": lead["price"],
             "group_id": lead["group_id"],
             "is_deleted": lead["is_deleted"],
             "score": lead["score"],
+            "created_by": lead["created_by"],
             "custom_fields_values": lead["custom_fields_values"]
           }
       
       if events:
         eventCounter = Counter((event["type"], event["entity_type"], event["created_by"]) for event in events)
         for event in events:
-          result["events"].setdefault(event["created_by"], {}).setdefault(event["entity_type"], {}).setdefault(event["type"], {})[event["id"]] = {
+          result.get("events", {}).setdefault(event["created_by"], {}).setdefault(event["entity_type"], {}).setdefault(event["type"], {})[event["id"]] = {
               "entity_id": event["entity_id"],
               "created_by": event["created_by"],
               "account_id": event["account_id"]
           }
-          result["events"].setdefault(event["created_by"], {}).setdefault(event["entity_type"], {})[event["type"]]["__total"] = eventCounter[(event["type"], event["entity_type"], event["created_by"])]
+          result.get("events", {}).setdefault(event["created_by"], {}).setdefault(event["entity_type"], {})[event["type"]]["__total"] = eventCounter[(event["type"], event["entity_type"], event["created_by"])]
+
     if tasks:
       taskCounter = Counter(task["created_by"] for task in tasks)
       taskTypeCounter = Counter((task["created_by"], task["entity_type"]) for task in tasks)
       taskCompletedCounter = Counter((task["created_by"], task["entity_type"], task["is_completed"]) for task in tasks)
       taskUserCounter = Counter((task["created_by"], task["entity_type"], task["is_completed"], task["responsible_user_id"]) for task in tasks)
       for task in tasks:
-        result["tasks"].setdefault(task["created_by"], {}).setdefault(task["entity_type"], {}).setdefault(task["is_completed"], {}).setdefault(task["responsible_user_id"], {})[task["id"]] = {
+        result.get("tasks", {}).setdefault(task["created_by"], {})["__total"] = taskCounter.get(task["created_by"], 0)
+        result.get("tasks", {}).setdefault(task["created_by"], {}).setdefault(task["entity_type"], {})["__total"] = taskTypeCounter.get((task["created_by"], task["entity_type"]), 0)
+        result.get("tasks", {}).setdefault(task["created_by"], {}).setdefault(task["entity_type"], {}).setdefault(task["is_completed"], {})["__total"] = taskCompletedCounter.get((task["created_by"], task["entity_type"], task["is_completed"]), 0)
+        result.get("tasks", {}).setdefault(task["created_by"], {}).setdefault(task["entity_type"], {}).setdefault(task["is_completed"], {}).setdefault(task["responsible_user_id"], {})["__total"] = taskUserCounter.get((task["created_by"], task["entity_type"], task["is_completed"], task["responsible_user_id"]), 0)
+        result.get("tasks", {}).get(task["created_by"], {}).get(task["entity_type"], {}).get(task["is_completed"], {}).get(task["responsible_user_id"], {})[task["id"]] = {
           "text": task["text"],
           "result": task["result"],
           "complete_till": task["complete_till"]
         }
-        result["tasks"][task["created_by"]]["__total"] = taskCounter.get(task["created_by"], 0)
-        result["tasks"][task["created_by"]][task["entity_type"]]["__total"] = taskTypeCounter.get((task["created_by"], task["entity_type"]), 0)
-        result["tasks"][task["created_by"]][task["entity_type"]][task["is_completed"]]["__total"] = taskCompletedCounter.get((task["created_by"], task["entity_type"], task["is_completed"]), 0)
-        result["tasks"][task["created_by"]][task["entity_type"]][task["is_completed"]][task["responsible_user_id"]]["__total"] = taskUserCounter.get((task["created_by"], task["entity_type"], task["is_completed"], task["responsible_user_id"]), 0)
 
     return result
 
