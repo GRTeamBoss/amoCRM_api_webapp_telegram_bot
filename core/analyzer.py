@@ -1,9 +1,13 @@
+import os
 import json
 from pathlib import Path
 from urllib.parse import urlparse, unquote_plus, parse_qs
 
+from dotenv import load_dotenv
+
 from core import EVENTS_TYPES
 
+load_dotenv()
 
 class ExtractParams:
 
@@ -137,7 +141,7 @@ class ExtractData:
   def __init__(self) -> None:
     pass
 
-  def filter_and_get_total_count(self, date: str, params: list[tuple[str, str]], filename: str="stages.json") -> int:
+  def filter_and_get_total_count(self, date: str, params: list[tuple[str, str]], filename: str = os.getenv("DATA_JSON_SAVE_FILE", "stages.json")) -> int:
     def _value_exist(crmitem: dict[str, any], key: list | str, value: list):
       crm_value = False
       if isinstance(crmitem, dict):

@@ -1,11 +1,12 @@
 import json
+import os
 from pathlib import Path
 from collections import Counter
 from datetime import date, datetime, timedelta
 from typing import Literal
 from urllib import request
 
-from openpyxl import Workbook
+from openpyxl import Workbook, load_workbook
 import requests
 
 from config.config import Config
@@ -68,7 +69,10 @@ class AmoDataParsing:
     self.filter: dict[str, any] = serialize_dict_to_json(filter)
     self.date_from: str = date_from
     self.date_to: str = date_to
-    self.wb: Workbook = Workbook()
+    if Path(os.getenv("DATA_EXCEL_SAVE_FILE", "stages.xlsx")).exists():
+      self.wb = load_workbook(os.getenv("DATA_EXCEL_SAVE_FILE", "stages.xlsx"))
+    else:
+      self.wb: Workbook = Workbook()
 
 
   def _add_params(self, params: list[tuple[str, any]], params_type: Literal["event", "lead", "task"]) -> list[tuple[str, any]]:
@@ -287,10 +291,18 @@ class AmoDataParsing:
         break
     return result
 
-  def save_info_to_json(self, pipelines: dict[str, any], filename="stages.json") -> None:
+  def save_info_to_json(self, pipelines: dict[str, any], filename: str =os.getenv("DATA_JSON_SAVE_FILE", "stages.json")) -> None:
     Path(filename).write_text(json.dumps(pipelines, indent=4, ensure_ascii=False))
 
-  def save_info_to_excel(self, info: dict[str, any], filename="crminfo.xlsx") -> None:
-    pass
-    # ws = self.wb.active
-    # ws.append(list(info.keys()))
+  def save_info_to_excel(self, info: dict[str, any], filename: str =os.getenv("DATA_EXCEL_SAVE_FILE", "stages.xlsx")) -> None:
+    ws = self.wb.active
+    _row = 0
+    _col = 0
+    for k in list(info.keys()):
+      _row = 1
+      _col += 1
+      ws.cell(row=_row, column=_col, value=k)
+      for item in info[k]:
+        _row += 1
+        ws.cell(row=_row, column=_col, value=item)
+    self.wb.save(filename)

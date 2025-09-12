@@ -43,6 +43,7 @@ htmlcov/
 dmypy.json
 stages.json
 test.py
+urls.txt
 
 # --- Databases ---
 *.db
