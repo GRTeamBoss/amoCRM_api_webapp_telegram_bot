@@ -41,6 +41,8 @@ htmlcov/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+stages.json
+test.py
 
 # --- Databases ---
 *.db

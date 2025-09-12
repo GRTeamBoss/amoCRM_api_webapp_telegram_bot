@@ -2,20 +2,62 @@ import json
 from pathlib import Path
 from collections import Counter
 from datetime import date, datetime, timedelta
-from typing import Union, List, Dict, Optional, Required, Any
+from typing import Literal
+from urllib import request
 
 from openpyxl import Workbook
 import requests
 
 from config.config import Config
-from core import TaskFilter, serialize_dict_to_json
+from core import serialize_dict_to_json, TaskFilter
 from middleware import token_validate
 
 
 class AmoDataParsing:
 
+  __EVENTS: list[str] = [
+    "id",
+    "created_at",
+    "created_by",
+    "entity",
+    "entity_id",
+    "type",
+    "value_before",
+    "value_after"
+  ]
+
+  __LEADS: list[str] = [
+    "with",
+    "query",
+    "order",
+    "id",
+    "name",
+    "price",
+    "statuses",
+    "pipeline_id",
+    "created_by",
+    "updated_by",
+    "responsible_user_id",
+    "created_at",
+    "updated_at",
+    "closed_at",
+    "closest_task_at",
+    "custom_fields_values"
+  ]
+
+  __TASKS: list[str] = [
+    "task_type",
+    "is_completed",
+    "entity_type",
+    "entity_id",
+    "id",
+    "responsible_user_id",
+    "updated_at",
+    "order",
+  ]
+
   def __init__(self, 
-               filter: TaskFilter, 
+               filter: TaskFilter,
                date_from: str = date.today().strftime("%d.%m.%Y"), 
                date_to: str = date.today().strftime("%d.%m.%Y")
                ):
@@ -23,18 +65,48 @@ class AmoDataParsing:
     self.config.reload()
     self.access_token: str = self.config.TOKEN_DICT.get("access_token")
     self.token_type: str = self.config.TOKEN_DICT.get("token_type")
-    self.filter: dict = serialize_dict_to_json(filter)
+    self.filter: dict[str, any] = serialize_dict_to_json(filter)
     self.date_from: str = date_from
     self.date_to: str = date_to
-    # self.wb: Workbook = Workbook()
+    self.wb: Workbook = Workbook()
+
+
+  def _add_params(self, params: list[tuple[str, any]], params_type: Literal["event", "lead", "task"]) -> list[tuple[str, any]]:
+    get_params_type: dict[str, list[str]] = {
+      "event": self.__EVENTS,
+      "lead": self.__LEADS,
+      "task": self.__TASKS
+    }
+    if self.filter:
+      for k, v in self.filter.items():
+        if k in get_params_type[params_type]:
+          if k in ["updated_at", "created_at", "closed_at", "closest_task_at"]:
+            if type(self.filter[k]) != dict:
+              params.append((f"filter[{k}]", v))
+            else:
+              for k1, v1 in self.filter[k].items():
+                params.append((f"filter[{k}][{k1}]", self._serialize_date_to_timestamp(None, from_=v1, to_=v1).get(k1, 0)))
+          elif k == "order":
+            if type(self.filter[k]) != dict:
+              pass
+            else:
+              for k1, v1 in self.filter[k].items():
+                params.append((f"order[{k1}]", v1))
+          elif k == "query":
+            params.append((k, v))
+          elif k == "with":
+            params.append(("with[]", v))
+          else:
+            params.append((f"filter[{k}][]", v))
+    return params
 
 
   
-  def _serialize_date_to_timestamp(self, default: str, from_: str=None, to_: str=None) -> int | Dict | None:
+  def _serialize_date_to_timestamp(self, default: None | str, from_: None | str = None, to_: None | str = None) -> int | dict[str, int] | None:
     if default:
       return int(datetime.strptime(default, "%d.%m.%Y").timestamp())
     else:
-      if all(from_, to_):
+      if all((from_, to_)):
         return {
           "from": int(datetime.strptime(from_, "%d.%m.%Y").timestamp()),
           "to": int(datetime.strptime(to_, "%d.%m.%Y").timestamp())+86399
@@ -42,11 +114,11 @@ class AmoDataParsing:
       else:
         return None
 
-  def _serialize_timestamp_to_date(self, default: None | str | int, from_: str | int = None, to_: str | int = None) -> str | Dict | None:
+  def _serialize_timestamp_to_date(self, default: None | int, from_: None | int = None, to_: None | int = None) -> str | dict[str, str] | None:
     if default:
       return datetime.fromtimestamp(int(default)).strftime("%d.%m.%Y")
     else:
-      if all(from_, to_):
+      if all((from_, to_)):
         return {
           "from": datetime.fromtimestamp(int(from_)).strftime("%d.%m.%Y"),
           "to": datetime.fromtimestamp(int(to_)).strftime("%d.%m.%Y")
@@ -54,21 +126,22 @@ class AmoDataParsing:
       else:
         return None
       
-  def _add_day(self, default: str):
-    return (datetime.datetime.strptime(default, "%d.%m.%Y")+timedelta(days=1)).day
+  def _add_day(self, default: str) -> int:
+    return (datetime.strptime(default, "%d.%m.%Y")+timedelta(days=1)).day
 
 
-  def get_headers(self) -> Dict:
+  def get_headers(self) -> dict[str, str]:
     return {
         "Content-Type": "application/json",
         "Authorization": f"{self.token_type} {self.access_token}"
     }
 
   @token_validate
-  def update_leads(self) -> Dict:
-    date_from_ = self.date_from
-    date_to_ = self.date_to
-    day_from, month_from, year_from = date_from_.split(".")
+  def update_info(self) -> dict[str, any]:
+    global_result = {}
+    date_from_: str = self.date_from
+    date_to_: str = self.date_to
+    day_from,  month_from, year_from = date_from_.split(".")
     day_to, month_to, year_to = date_to_.split(".")
     if int(month_to) > int(month_from):
       for month in range(int(month_from), int(month_to)+1):
@@ -77,102 +150,56 @@ class AmoDataParsing:
           if next_day == 1:
             break
           day = next_day or int(day_from)
-          AmoDataParsing({}, date_from=f"{day}.{month}.{year_from}", date_to=f"{day}.{month}.{year_from}").update_leads()
+          temp_result = AmoDataParsing({}, date_from=f"{day}.{month}.{year_from}", date_to=f"{day}.{month}.{year_from}").update_info()
+          global_result[f"{day}.{month}.{year_from}"] = temp_result[f"{day}.{month}.{year_from}"]
           next_day = self._add_day(date_from_)
     else:
       if int(day_to) > int(day_from):
         for day in range(int(day_from), int(day_to)+1):
-          AmoDataParsing({}, date_from=f"{day}.{month_from}.{year_from}", date_to=f"{day}.{month_from}.{year_from}").update_leads()
-    result = {}
-    pipelines = self.get_pipelines()
-    tasks = self.get_tasks()
-    result["date_from"] = self.date_from
-    result["date_to"] = self.date_to
-    result["pipeline"] = {}
-    result["events"] = {}
-    result["leads"] = {}
-    result["tasks"] = {}
-    leadCounter = {}
-    for pipeline in pipelines:
-      leads = self.get_leads(pipeline["id"])
-      events = self.get_events(pipeline["id"])
-      statuses = pipeline.get("_embedded", {}).get("statuses", [])
+          temp_result = AmoDataParsing({}, date_from=f"{day}.{month_from}.{year_from}", date_to=f"{day}.{month_from}.{year_from}").update_info()
+          global_result[f"{day}.{month_from}.{year_from}"] = temp_result[f"{day}.{month_from}.{year_from}"]
+    result: dict[str, any] = {}
+    pipelines: list[dict[str, any]] | None = self.get_pipelines()
+    tasks: list[dict[str, any]] | list = self.get_tasks()
+    events: list[dict[str, any]] | list = self.get_events()
+    leads: list[dict[str, any]] | list = self.get_leads()
+    result.setdefault("pipelines", {})
+    result.get("pipelines", {}).setdefault("__total", {})["pipelines"] = len(pipelines)
+    result.get("pipelines", {}).setdefault("items", [])
+    result.setdefault("events", {})
+    result.get("events", {}).setdefault("__total", {})["events"] = len(events)
+    result.get("events", {}).setdefault("items", [])
+    result.setdefault("leads", {})
+    result.get("leads", {}).setdefault("__total", {})["leads"] = len(leads)
+    result.get("leads", {}).setdefault("items", [])
+    result.setdefault("tasks", {})
+    result.get("tasks", {}).setdefault("__total", {})["tasks"] = len(tasks)
+    result.get("tasks", {}).setdefault("items", [])
+    if pipelines:
+      for pipeline in pipelines:
+        result.get("pipelines", {})["items"].append(pipeline)
+        statuses = pipeline.get("_embedded", {}).get("statuses", [])
 
-      result.get("pipeline", {})[pipeline["id"]] = {
-        "name": pipeline["id"],
-        "account_id": pipeline["account_id"],
-        "statuses": {
-          "__total": 0
-        }
-      }
+        if statuses:
+          result.get("pipelines", {}).get("__total", {}).setdefault("statuses", {})[pipeline["id"]] = len(statuses)
 
-      for status in statuses:
-        result.get("pipeline", {}).get(pipeline["id"], {}).get("statuses", {})[status["id"]] = {
-          "name": status.get("name", None),
-          "sort": status.get("sort", None),
-          "type": status.get("type", None),
-          "account_id": status.get("account_id", None),
-          "leads": {
-            "__total": 0
-          }
-        }
-
-      if leads:
-        leadCounter = Counter((lead["status_id"], lead["pipeline_id"]) for lead in leads)
-        leadPipelineCounter = Counter(lead["pipeline_id"] for lead in leads)
-        for status in statuses:
-          result.get("pipeline", {}).get(pipeline["id"], {}).get("statuses", {})["__total"] = leadPipelineCounter.get(status["pipeline_id"], 0)
-          result.get("pipeline", {}).get(pipeline["id"], {}).get("statuses", {}).get(status["id"], {}).get("leads", {})["__total"] = leadCounter.get((status["id"], status["pipeline_id"]), 0)
-        for lead in leads:
-          result.get("pipeline", {}).get(pipeline["id"], {}).get("statuses", {}).get(lead["status_id"], {}).get("leads", {})[lead["id"]] = lead["name"]
-
-      if leads:
-        leadPipelineCounter = Counter(lead["pipeline_id"] for lead in leads)
-        leadUserCounter = Counter((lead["pipeline_id"], lead["responsible_user_id"]) for lead in leads)
-        leadStatusCounter = Counter((lead["pipeline_id"], lead["responsible_user_id"], lead["status_id"]) for lead in leads)
-        for lead in leads:
-          result.get("leads", {}).setdefault(lead["pipeline_id"], {})["__total"] = leadPipelineCounter.get(lead["pipeline_id"], 0)
-          result.get("leads", {}).setdefault(lead["pipeline_id"], {}).setdefault(lead["responsible_user_id"], {})["__total"] = leadUserCounter.get((lead["pipeline_id"], lead["responsible_user_id"]), 0)
-          result.get("leads", {}).setdefault(lead["pipeline_id"], {}).setdefault(lead["responsible_user_id"], {}).setdefault(lead["status_id"], {})["__total"] = leadStatusCounter.get((lead["pipeline_id"], lead["responsible_user_id"], lead["status_id"]), 0)
-          result.get("leads", {}).get(lead["pipeline_id"], {}).get(lead["responsible_user_id"], {}).get(lead["status_id"], {})[lead["id"]] = {
-            "name": lead["name"],
-            "price": lead["price"],
-            "group_id": lead["group_id"],
-            "is_deleted": lead["is_deleted"],
-            "score": lead["score"],
-            "created_by": lead["created_by"],
-            "custom_fields_values": lead["custom_fields_values"]
-          }
+    if leads:
+      for lead in leads:
+        result.get("leads", {})["items"].append(lead)
       
-      if events:
-        eventCounter = Counter((event["type"], event["entity_type"], event["created_by"]) for event in events)
-        for event in events:
-          result.get("events", {}).setdefault(event["created_by"], {}).setdefault(event["entity_type"], {}).setdefault(event["type"], {})[event["id"]] = {
-              "entity_id": event["entity_id"],
-              "created_by": event["created_by"],
-              "account_id": event["account_id"]
-          }
-          result.get("events", {}).setdefault(event["created_by"], {}).setdefault(event["entity_type"], {})[event["type"]]["__total"] = eventCounter[(event["type"], event["entity_type"], event["created_by"])]
+    if events:
+      for event in events:
+        result.get("events", {})["items"].append(event)
 
     if tasks:
-      taskCounter = Counter(task["created_by"] for task in tasks)
-      taskTypeCounter = Counter((task["created_by"], task["entity_type"]) for task in tasks)
-      taskCompletedCounter = Counter((task["created_by"], task["entity_type"], task["is_completed"]) for task in tasks)
-      taskUserCounter = Counter((task["created_by"], task["entity_type"], task["is_completed"], task["responsible_user_id"]) for task in tasks)
       for task in tasks:
-        result.get("tasks", {}).setdefault(task["created_by"], {})["__total"] = taskCounter.get(task["created_by"], 0)
-        result.get("tasks", {}).setdefault(task["created_by"], {}).setdefault(task["entity_type"], {})["__total"] = taskTypeCounter.get((task["created_by"], task["entity_type"]), 0)
-        result.get("tasks", {}).setdefault(task["created_by"], {}).setdefault(task["entity_type"], {}).setdefault(task["is_completed"], {})["__total"] = taskCompletedCounter.get((task["created_by"], task["entity_type"], task["is_completed"]), 0)
-        result.get("tasks", {}).setdefault(task["created_by"], {}).setdefault(task["entity_type"], {}).setdefault(task["is_completed"], {}).setdefault(task["responsible_user_id"], {})["__total"] = taskUserCounter.get((task["created_by"], task["entity_type"], task["is_completed"], task["responsible_user_id"]), 0)
-        result.get("tasks", {}).get(task["created_by"], {}).get(task["entity_type"], {}).get(task["is_completed"], {}).get(task["responsible_user_id"], {})[task["id"]] = {
-          "text": task["text"],
-          "result": task["result"],
-          "complete_till": task["complete_till"]
-        }
+        result.get("tasks", {}).get("items", []).append(task)
+    
+    global_result[self.date_from] = result
 
-    return result
+    return global_result
 
-  def get_events(self, pipeline_id: None | int, page: int=1, limit: int=100) -> List | None:
+  def get_events(self, page: int = 1, limit: int = 100) -> list[dict[str, any]] | list:
     if limit > 100:
       raise ValueError("limit should be max 100")
     headers = self.get_headers()
@@ -181,27 +208,28 @@ class AmoDataParsing:
     params = [
       ("page", page),
       ("limit", limit),
-      ("filter[pipeline_id][]", pipeline_id),
       ("filter[event_type][]", 14),
       ("filter[created_at][from]", self._serialize_date_to_timestamp(self.date_from)),
-      ("filter[created_at][to]", self._serialize_date_to_timestamp(self.date_to)+86399),
+      ("filter[created_at][to]", int(self._serialize_date_to_timestamp(self.date_to)+86399)),
     ]
+    params = self._add_params(params, "event")
     while True:
       try:
         response = requests.get(url, headers=headers, timeout=100, params=params)
         response.raise_for_status()
         page += 1
+        params[0]=("page", page)
         events = response.json().get("_embedded", {}).get("events", [])
         if not events:
-          return None
+          break
         if response.status_code == 200:
             result.extend(events)
       except requests.RequestException as e:
-        return None
-      params[0]=("page", page)
+        break
+    return result
 
 
-  def get_pipelines(self) -> Dict | None:
+  def get_pipelines(self) -> list[dict[str, any]] | None:
     headers = self.get_headers()
     url = f"{self.config.BASE_URL}/api/v4/leads/pipelines"
     response = requests.get(url, headers=headers, timeout=100)
@@ -210,91 +238,66 @@ class AmoDataParsing:
         return response.json()["_embedded"]["pipelines"]
     return None
 
-  def get_leads(self, pipeline_id: int, page: int=1, limit: int=250) -> Dict | None:
+  def get_leads(self, page: int = 1, limit: int = 250) -> list[dict[str, any]] | list:
     if limit > 250:
       raise ValueError("limit should be 250 max")
+    result = []
     headers = self.get_headers()
     url = f"{self.config.BASE_URL}/api/v4/leads"
     params = [
       ("page", page),
       ("limit", limit),
-      ("filter[pipeline_id][]", pipeline_id),
       ("filter[created_at][from]", self._serialize_date_to_timestamp(self.date_from)),
       ("filter[created_at][to]", self._serialize_date_to_timestamp(self.date_to)+86399),
       ("with[]", "contacts"),
       ("with[]", "tags")
     ]
-    if self.filter:
-      for k, v in self.filter.items():
-        if k == "updated_at":
-          if type(self.filter[k]) != dict:
-            params.append((f"filter[{k}]", v))
-          else:
-            for k1, v1 in self.filter[k].items():
-              params.append((f"filter[updated_at][{k1}]", v1))
-        elif k == "order":
-          if type(self.filter[k]) != dict:
-            pass
-          else:
-            for k1, v1 in self.filter[k].items():
-              params.append((f"order[{k1}]", v1))
-        elif k == "created_at":
-          if type(self.filter[k]) != dict:
-            params.append((f"filter[{k}]", v))
-          else:
-            for k1, v1 in self.filter[k].items():
-              params.append((f"filter[created_at][{k1}]", v1))
-        elif k == "query":
-          params.append((k, v))
-        elif k == "with":
-          params.append(("with[]", v))
-        else:
-          params.append((f"filter[{k}][]", v))
-    response = requests.get(url, headers=headers, timeout=100, params=params)
-    response.raise_for_status()
-    if response.status_code == 200:
-      return response.json().get("_embedded", {}).get("leads", [])
-    return None
+    params = self._add_params(params, "lead")
+    while True:
+      try:
+        response = requests.get(url, headers=headers, timeout=100, params=params)
+        response.raise_for_status()
+        leads =  response.json().get("_embedded", {}).get("leads", [])
+        if not leads:
+          break
+        page += 1
+        params[0] = ("page", page)
+        if response.status_code == 200:
+          result.extend(leads)
+      except requests.RequestException:
+        break
+    return result
     
-  def get_tasks(self, 
-                page: int=1, 
-                limit: int=250) -> List[Dict] | None:
+  def get_tasks(self, page: int = 1, limit: int = 250) -> list[dict[str, any]] | list:
     if limit > 250:
       raise ValueError("limit should be max 250")
+    result = []
     headers = self.get_headers()
     url = f"{self.config.BASE_URL}/api/v4/tasks"
     params = [
       ("page", page),
       ("limit", limit)
     ]
-    if self.filter:
-      for k, v in self.filter.items():
-        if k == "updated_at":
-          if type(self.filter[k]) != dict:
-            params.append((f"filter[{k}]", v))
-          else:
-            for k1, v1 in self.filter[k].items():
-              params.append((f"filter[updated_at][{k1}]", v1))
-        elif k == "order":
-          if type(self.filter[k]) != dict:
-            pass
-          else:
-            for k1, v1 in self.filter[k].items():
-              params.append((f"order[{k1}]", v1))
-        elif k == "created_at":
-          if type(self.filter[k]) != dict:
-            params.append((f"filter[{k}]", v))
-          else:
-            for k1, v1 in self.filter[k].items():
-              params.append((f"filter[created_at][{k1}]", v1))
-        else:
-          params.append((f"filter[{k}][]", v))
-    response = requests.get(url, headers=headers, timeout=100, params=params)
-    response.raise_for_status()
-    if response.status_code == 200:
-      return response.json().get("_embedded", {}).get("tasks", [])
-    else:
-      return None
+    params = self._add_params(params, "task")
+    while True:
+      try:
+        response = requests.get(url, headers=headers, timeout=100, params=params)
+        response.raise_for_status()
+        page += 1
+        params[0] = ("page", page)
+        task = response.json().get("_embedded", {}).get("tasks", [])
+        if not task:
+          break
+        if response.status_code == 200:
+          result.extend(task)
+      except requests.RequestException:
+        break
+    return result
 
-  def save_pipelines_to_json(self, pipelines, filename="stages.json"):
+  def save_info_to_json(self, pipelines: dict[str, any], filename="stages.json") -> None:
     Path(filename).write_text(json.dumps(pipelines, indent=4, ensure_ascii=False))
+
+  def save_info_to_excel(self, info: dict[str, any], filename="crminfo.xlsx") -> None:
+    pass
+    # ws = self.wb.active
+    # ws.append(list(info.keys()))

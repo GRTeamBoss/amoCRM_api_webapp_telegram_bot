@@ -7,7 +7,7 @@ import requests
 from config.config import Config
 
 
-def update_tokens():
+def update_tokens() -> dict[str, any] | None:
     config = Config()
     config.reload()
     if int(time.time()) > config.TOKEN_DICT.get("expires_at", 0):
@@ -28,7 +28,7 @@ def update_tokens():
           raise RuntimeError(f"Error updating tokens: {response.text}")
 
 
-def save_tokens(data):
+def save_tokens(data: dict[str, any]) -> None:
     expires_in = int(data.get("expires_in", 0))
     if expires_in > 0:
         data["expires_at"] = int(time.time()) + max(expires_in - 60, 0)
