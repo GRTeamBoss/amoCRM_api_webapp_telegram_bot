@@ -139,63 +139,54 @@ class AmoDataParsing:
   @token_validate
   def update_info(self) -> dict[str, any]:
     global_result = {}
-    date_from_: str = self.date_from
-    date_to_: str = self.date_to
-    day_from,  month_from, year_from = date_from_.split(".")
-    day_to, month_to, year_to = date_to_.split(".")
-    if int(month_to) > int(month_from):
-      for month in range(int(month_from), int(month_to)+1):
-        next_day = False
-        while True:
-          if next_day == 1:
-            break
-          day = next_day or int(day_from)
-          temp_result = AmoDataParsing({}, date_from=f"{day}.{month}.{year_from}", date_to=f"{day}.{month}.{year_from}").update_info()
-          global_result[f"{day}.{month}.{year_from}"] = temp_result[f"{day}.{month}.{year_from}"]
-          next_day = self._add_day(date_from_)
+    date_from_range = datetime.strptime(self.date_from, "%d.%m.%Y").date()
+    date_to_range = datetime.strptime(self.date_to, "%d.%m.%Y").date()
+    delta = date_to_range - date_from_range
+    if delta.days > 0:
+      for i in range(delta.days + 1):
+        date_key = date_from_range + timedelta(days=i)
+        date_string = date_key.strftime("%-d.%-m.%Y")
+        temp_result = AmoDataParsing({}, date_from=date_string, date_to=date_string).update_info()
+        global_result[date_string] = temp_result[date_string]
     else:
-      if int(day_to) > int(day_from):
-        for day in range(int(day_from), int(day_to)+1):
-          temp_result = AmoDataParsing({}, date_from=f"{day}.{month_from}.{year_from}", date_to=f"{day}.{month_from}.{year_from}").update_info()
-          global_result[f"{day}.{month_from}.{year_from}"] = temp_result[f"{day}.{month_from}.{year_from}"]
-    result: dict[str, any] = {}
-    pipelines: list[dict[str, any]] | None = self.get_pipelines()
-    tasks: list[dict[str, any]] | list = self.get_tasks()
-    events: list[dict[str, any]] | list = self.get_events()
-    leads: list[dict[str, any]] | list = self.get_leads()
-    result.setdefault("pipelines", {})
-    result.get("pipelines", {}).setdefault("__total", {})["pipelines"] = len(pipelines)
-    result.get("pipelines", {}).setdefault("items", [])
-    result.setdefault("events", {})
-    result.get("events", {}).setdefault("__total", {})["events"] = len(events)
-    result.get("events", {}).setdefault("items", [])
-    result.setdefault("leads", {})
-    result.get("leads", {}).setdefault("__total", {})["leads"] = len(leads)
-    result.get("leads", {}).setdefault("items", [])
-    result.setdefault("tasks", {})
-    result.get("tasks", {}).setdefault("__total", {})["tasks"] = len(tasks)
-    result.get("tasks", {}).setdefault("items", [])
-    if pipelines:
-      for pipeline in pipelines:
-        result.get("pipelines", {})["items"].append(pipeline)
-        statuses = pipeline.get("_embedded", {}).get("statuses", [])
+      result: dict[str, any] = {}
+      pipelines: list[dict[str, any]] | None = self.get_pipelines()
+      tasks: list[dict[str, any]] | list = self.get_tasks()
+      events: list[dict[str, any]] | list = self.get_events()
+      leads: list[dict[str, any]] | list = self.get_leads()
+      result.setdefault("pipelines", {})
+      result.get("pipelines", {}).setdefault("__total", {})["pipelines"] = len(pipelines)
+      result.get("pipelines", {}).setdefault("items", [])
+      result.setdefault("events", {})
+      result.get("events", {}).setdefault("__total", {})["events"] = len(events)
+      result.get("events", {}).setdefault("items", [])
+      result.setdefault("leads", {})
+      result.get("leads", {}).setdefault("__total", {})["leads"] = len(leads)
+      result.get("leads", {}).setdefault("items", [])
+      result.setdefault("tasks", {})
+      result.get("tasks", {}).setdefault("__total", {})["tasks"] = len(tasks)
+      result.get("tasks", {}).setdefault("items", [])
+      if pipelines:
+        for pipeline in pipelines:
+          result.get("pipelines", {})["items"].append(pipeline)
+          statuses = pipeline.get("_embedded", {}).get("statuses", [])
 
-        if statuses:
-          result.get("pipelines", {}).get("__total", {}).setdefault("statuses", {})[pipeline["id"]] = len(statuses)
+          if statuses:
+            result.get("pipelines", {}).get("__total", {}).setdefault("statuses", {})[pipeline["id"]] = len(statuses)
 
-    if leads:
-      for lead in leads:
-        result.get("leads", {})["items"].append(lead)
+      if leads:
+        for lead in leads:
+          result.get("leads", {})["items"].append(lead)
+        
+      if events:
+        for event in events:
+          result.get("events", {})["items"].append(event)
+
+      if tasks:
+        for task in tasks:
+          result.get("tasks", {}).get("items", []).append(task)
       
-    if events:
-      for event in events:
-        result.get("events", {})["items"].append(event)
-
-    if tasks:
-      for task in tasks:
-        result.get("tasks", {}).get("items", []).append(task)
-    
-    global_result[self.date_from] = result
+      global_result[self.date_from] = result
 
     return global_result
 
@@ -276,7 +267,9 @@ class AmoDataParsing:
     url = f"{self.config.BASE_URL}/api/v4/tasks"
     params = [
       ("page", page),
-      ("limit", limit)
+      ("limit", limit),
+      ("filter[updated_at][from]", self._serialize_date_to_timestamp(self.date_from)),
+      ("filter[updated_at][to]", self._serialize_date_to_timestamp(self.date_to)+86399)
     ]
     params = self._add_params(params, "task")
     while True:
