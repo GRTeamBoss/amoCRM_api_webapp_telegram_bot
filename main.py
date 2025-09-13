@@ -38,9 +38,9 @@ def main():
     date_to_range = datetime.strptime(date_to, "%d.%m.%Y").date()
     delta = date_to_range - date_from_range
     data_parser = AmoDataParsing({}, date_from=date_from, date_to=date_to)
-    # leads = data_parser.update_info()
-    # if leads:
-    #   data_parser.save_info_to_json(leads)
+    leads = data_parser.update_info()
+    if leads:
+      data_parser.save_info_to_json(leads)
     excel_data = {}
     for i in range(delta.days + 1):
       date_key = date_from_range + timedelta(days=i)
