@@ -5,13 +5,16 @@ from collections import Counter
 from datetime import date, datetime, timedelta
 from typing import Literal
 from urllib import request
+from urllib.parse import urlparse, parse_qs, urlencode
 
 from openpyxl import Workbook, load_workbook
+from openpyxl.comments import Comment
 import requests
 
 from config.config import Config
 from core import serialize_dict_to_json, TaskFilter
 from middleware import token_validate
+from .dbdriver import DB
 
 
 class AmoDataParsing:
@@ -142,6 +145,7 @@ class AmoDataParsing:
 
   @token_validate
   def update_info(self) -> dict[str, any]:
+    dbinfo = DB()
     global_result = {}
     date_from_range = datetime.strptime(self.date_from, "%d.%m.%Y").date()
     date_to_range = datetime.strptime(self.date_to, "%d.%m.%Y").date()
@@ -184,6 +188,7 @@ class AmoDataParsing:
         
       if events:
         for event in events:
+          dbinfo.add_event(event)
           result.get("events", {})["items"].append(event)
 
       if tasks:
@@ -294,7 +299,7 @@ class AmoDataParsing:
   def save_info_to_json(self, pipelines: dict[str, any], filename: str =os.getenv("DATA_JSON_SAVE_FILE", "stages.json")) -> None:
     Path(filename).write_text(json.dumps(pipelines, indent=4, ensure_ascii=False))
 
-  def save_info_to_excel(self, info: dict[str, any], filename: str =os.getenv("DATA_EXCEL_SAVE_FILE", "stages.xlsx")) -> None:
+  def save_info_to_excel(self, info: dict[str, any], urls: list[str], filename: str =os.getenv("DATA_EXCEL_SAVE_FILE", "stages.xlsx")) -> None:
     ws = self.wb.active
     _row = 0
     _col = 0
@@ -302,7 +307,20 @@ class AmoDataParsing:
       _row = 1
       _col += 1
       ws.cell(row=_row, column=_col, value=k)
-      for item in info[k]:
+      for i in range(len(info[k])):
         _row += 1
-        ws.cell(row=_row, column=_col, value=item)
+        if urls[i] == "Skip":
+          ws.cell(row=_row, column=_col, value=info[k][i])
+        else:
+          print(urls[i])
+          uriinstance = urlparse(urls[i])
+          query = parse_qs(uriinstance.query)
+          fragment = parse_qs(uriinstance.fragment)
+          query.update(fragment)
+          query.get("filter_date_from", [])[0] = k
+          query.get("filter_date_to", [])[0] = k
+          query_reset = urlencode(query, doseq=True)
+          uriinstance_reset = f"https://{uriinstance.netloc}{uriinstance.path}?{query_reset}"
+          comment = Comment(uriinstance_reset, "")
+          ws.cell(row=_row, column=_col, value=info[k][i]).comment = comment
     self.wb.save(filename)

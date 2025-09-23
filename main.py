@@ -8,9 +8,11 @@ from config.config import Config
 from middleware import token_validate
 from core.data import AmoDataParsing
 from core.analyzer import ExtractParams, ExtractData
+from core.dbdriver import DB
 
 load_dotenv()
 
+dbinfo = DB()
 
 uri = []
 
@@ -32,8 +34,8 @@ def main():
     config = Config()
     config.reload()
     get_data = ExtractData()
-    date_from = "8.9.2025"
-    date_to = "12.9.2025"
+    date_from = "28.8.2025"
+    date_to = "28.8.2025"
     date_from_range = datetime.strptime(date_from, "%d.%m.%Y").date()
     date_to_range = datetime.strptime(date_to, "%d.%m.%Y").date()
     delta = date_to_range - date_from_range
@@ -46,16 +48,13 @@ def main():
       date_key = date_from_range + timedelta(days=i)
       date_string = date_key.strftime("%-d.%-m.%Y")
       excel_data[date_string] = []
-      print("[#] date: ", date_string)
       for item in cell_filter:
         if item is None:
           excel_data[date_string].append(None)
-          print()
         else:
           total = get_data.filter_and_get_total_count(date_string, item)
           excel_data[date_string].append(total)
-          print(total)
-    data_parser.save_info_to_excel(excel_data)
+    data_parser.save_info_to_excel(excel_data, uri)
 
 
 
